@@ -68,7 +68,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
   const emailColumn = table.getColumn("email");
 
   return (
-    <div className="min-h-screen bg-zinc-950 p-6 text-zinc-100">
+    <div className="min-h-screen ">
       <div className="mx-auto max-w-7xl rounded-xl border border-zinc-800 bg-zinc-900 shadow-lg">
         {/* ===== TOOLBAR ===== */}
         <div className="flex items-center justify-between border-b border-zinc-800 p-4">
@@ -87,38 +87,6 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
               "
             />
           )}
-
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="outline"
-                className="
-                  border-zinc-800
-                  bg-zinc-950
-                  text-zinc-100
-                  hover:bg-zinc-800
-                "
-              >
-                Columns
-              </Button>
-            </DropdownMenuTrigger>
-
-            <DropdownMenuContent align="end" className="bg-zinc-900 border-zinc-800 text-white">
-              {table
-                .getAllColumns()
-                .filter((column) => column.getCanHide())
-                .map((column) => (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) => column.toggleVisibility(!!value)}
-                    className="capitalize text-white focus:bg-zinc-800"
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
         </div>
 
         {/* ===== TABLE ===== */}

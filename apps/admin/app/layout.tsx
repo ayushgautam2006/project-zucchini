@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
+import { AuthProvider } from "@/contexts/auth-context";
+import { ProtectedRoute } from "@/components/protected-route";
 
 export const metadata: Metadata = {
   title: "Admin Dashboard - Project Zucchini",
@@ -13,7 +16,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+          <AuthProvider>
+            <ProtectedRoute>{children}</ProtectedRoute>
+          </AuthProvider>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

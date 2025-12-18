@@ -1,73 +1,56 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButton,
-  InputGroupInput,
-} from "@/components/ui/input-group";
-import { LockKeyhole, ShieldUser, UserRound } from "lucide-react";
-import { useState } from "react";
 
-function LoginPage() {
-  const [showHideBtn, setShowHideBtn] = useState("Show");
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { signInWithGoogle } from "@repo/firebase-config";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import GoogleIcon from "@/components/google";
+
+export default function LoginPage({ className, ...props }: React.ComponentProps<"div">) {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleGoogleLogin = async () => {
+    try {
+      setIsLoading(true);
+      const result = await signInWithGoogle();
+
+      if (result) {
+        console.log("Login successful:", result.user.email);
+
+        router.push("/registrations");
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
-    <div className="bg-[#0A0A0A] min-h-screen flex flex-col items-center justify-center">
-      <ShieldUser className="stroke-neutral-300" size={44} />
-      <h2 className="text-neutral-400 text-[1.5rem] mt-2">Admin Login</h2>
-      <form onSubmit={handleAdminLogin} className="flex flex-col gap-6 mt-8 w-[20rem]">
-        <InputGroup className="border-[#373737] border-2 bg-[#151515]">
-          <InputGroupInput
-            placeholder="Username"
-            className="text-white placeholder:text-[1rem] placeholder:text-[#A1A1A1] selection:bg-white selection:text-black"
-            type="username"
-            autoComplete="name"
-            required
-          />
-          <InputGroupAddon>
-            <UserRound className="size-5 stroke-2 stroke-[#A1A1A1]" />
-          </InputGroupAddon>
-          <InputGroupAddon align="inline-end"></InputGroupAddon>
-        </InputGroup>
-
-        <InputGroup className="border-[#373737] border-2 bg-[#151515]">
-          <InputGroupInput
-            placeholder="Password"
-            className="text-white placeholder:text-[1rem] placeholder:text-[#A1A1A1] selection:bg-white selection:text-black"
-            type={showHideBtn === "Show" ? "password" : "text"}
-            required
-          />
-          <InputGroupAddon>
-            <LockKeyhole className="size-5 stroke-2 stroke-[#A1A1A1]" />
-          </InputGroupAddon>
-          <InputGroupAddon align="inline-end"></InputGroupAddon>
-          <InputGroupAddon align="inline-end">
-            <InputGroupButton
-              className="hover:text-neutral-200 hover:bg-transparent cursor-pointer"
-              onClick={() => {
-                if (showHideBtn === "Show") setShowHideBtn("Hide");
-                else setShowHideBtn("Show");
-              }}
+    <div className="min-h-screen flex items-center justify-center p-6">
+      <div className={cn("flex flex-col gap-6 w-full max-w-md", className)} {...props}>
+        <Card>
+          <CardHeader>
+            <CardTitle>Admin Login</CardTitle>
+            <CardDescription>Please Enter your credentials to login</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button
+              variant="outline"
               type="button"
+              className="w-full"
+              onClick={handleGoogleLogin}
+              disabled={isLoading}
             >
-              {showHideBtn}
-            </InputGroupButton>
-          </InputGroupAddon>
-        </InputGroup>
-        <Button
-          variant="outline"
-          className="hover:opacity-85 cursor-pointer text-[1.1rem] font-semibold"
-        >
-          Login
-        </Button>
-      </form>
+              <GoogleIcon />
+              {isLoading ? "Signing in..." : "Login with Google"}
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
-
-async function handleAdminLogin(e: React.FormEvent<HTMLFormElement>) {
-  e.preventDefault();
-}
-
-export default LoginPage;
