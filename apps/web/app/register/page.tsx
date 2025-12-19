@@ -74,7 +74,7 @@ export default function RegisterPage() {
     });
 
     return () => unsubscribe();
-  }, [checkRegistration]);
+  }, []);
 
   const handleGoogleSignIn = async () => {
     setError(null);

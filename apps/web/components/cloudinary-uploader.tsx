@@ -16,12 +16,14 @@ interface CloudinaryUploaderProps {
   maxFiles?: number;
   value?: string;
   onUploadComplete?: (url: string) => void;
+  showCopyButton?: boolean;
 }
 
 export default function CloudinaryUploader({
   maxFiles,
   value,
   onUploadComplete,
+  showCopyButton = false,
 }: CloudinaryUploaderProps = {}) {
   const [isDragging, setIsDragging] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
@@ -148,7 +150,7 @@ export default function CloudinaryUploader({
           multiple={!maxFiles || maxFiles > 1}
           onChange={handleFileSelect}
           className="hidden"
-          accept="image/*,video/*,.pdf,.doc,.docx"
+          accept="image/*,video/*,.pdf,.doc,.docx,.svg"
         />
 
         <div className="flex flex-col items-center gap-3">
@@ -180,7 +182,9 @@ export default function CloudinaryUploader({
                 >
                   Drop {maxFiles === 1 ? "file" : "files"} here or click to browse
                 </p>
-                <p className="text-sm text-gray-500">Supports images, videos, and documents</p>
+                <p className="text-sm text-gray-500">
+                  Supports images (including SVG), videos, and documents
+                </p>
               </div>
             </>
           )}
@@ -237,12 +241,28 @@ export default function CloudinaryUploader({
                     </p>
                   </div>
 
-                  <button
-                    onClick={() => removeFile(file.timestamp)}
-                    className="flex-shrink-0 p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
+                  <div className="flex items-center gap-2">
+                    {showCopyButton && (
+                      <button
+                        onClick={() => copyToClipboard(file.url)}
+                        className="flex-shrink-0 p-2 text-gray-400 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors"
+                        title="Copy URL"
+                      >
+                        {copiedUrl === file.url ? (
+                          <Check className="w-5 h-5 text-green-500" />
+                        ) : (
+                          <Copy className="w-5 h-5" />
+                        )}
+                      </button>
+                    )}
+
+                    <button
+                      onClick={() => removeFile(file.timestamp)}
+                      className="flex-shrink-0 p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
