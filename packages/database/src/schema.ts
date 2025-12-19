@@ -15,10 +15,9 @@ export const usersTable = pgTable("users", {
   rollNumber: varchar({ length: 100 }).notNull(),
   idCard: text().notNull(),
   referralCode: varchar({ length: 50 }),
-  campusAmbassador: boolean().default(false),
+  permission: text().notNull(),
+  undertaking: text().notNull(),
   isVerified: boolean().notNull().default(false),
-  hasPermission: boolean().notNull().default(true),
-  hasAcceptedUndertaking: boolean().notNull().default(true),
   registeredAt: timestamp().notNull().defaultNow(),
   updatedAt: timestamp().notNull().defaultNow(),
 });
