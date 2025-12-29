@@ -8,7 +8,6 @@ import { navItems } from "@/config/marginals";
 import { heroImages } from "@/config/hero";
 import GradientUnderline from "./gradient";
 
-// --- Sub-Component: Countdown Timer ---
 function CountdownTimer() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0 });
 
@@ -34,7 +33,6 @@ function CountdownTimer() {
 
   return (
     <div className="flex items-start gap-4 text-white font-berry">
-      {/* Helper to render time blocks */}
       {[
         { val: timeLeft.days, label: "DAYS" },
         { val: ":", label: "" },
@@ -57,7 +55,6 @@ function CountdownTimer() {
   );
 }
 
-// --- Sub-Component: Music Visualizer ---
 function MusicVisualizer() {
   return (
     <div className="relative w-12 h-12 md:w-16 md:h-16 flex-shrink-0">
@@ -76,10 +73,11 @@ function MusicVisualizer() {
   );
 }
 
-// --- Main Header Component ---
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   const handleCloseMenu = () => setIsClosing(true);
 
@@ -88,14 +86,31 @@ export default function Header() {
     else setIsMenuOpen(true);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY < lastScrollY || currentScrollY < 10) {
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 80) {
+        setIsVisible(false);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
   return (
-    // 1. STICKY WRAPPER
-    <header className="fixed top-0 z-50 w-full px-6 py-4 transition-all duration-300">
-      {/* Container for Desktop Layout */}
+    <header
+      className={`fixed top-0 z-50 w-full px-6 py-4 transition-all duration-300 backdrop-blur-[3px] ${
+        isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+      }`}
+    >
       <div className="max-w-[1920px] mx-auto flex items-center justify-between">
-        {/* LEFT: Desktop Nav / Mobile Menu Button */}
         <div className="flex items-center">
-          {/* Mobile Hamburger */}
           <button
             onClick={toggleMenu}
             className="md:hidden text-white relative w-8 h-8 focus:outline-none z-50"
@@ -120,7 +135,6 @@ export default function Header() {
             </span>
           </button>
 
-          {/* Desktop Nav Links */}
           <nav className="hidden md:flex gap-8 lg:gap-12 text-white font-inria">
             {navItems.map((item) => (
               <Link
@@ -137,9 +151,7 @@ export default function Header() {
           </nav>
         </div>
 
-        {/* CENTER/RIGHT: Timer & Visualizer Group */}
         <div className="flex items-center gap-6 md:gap-12">
-          {/* Timer - Hidden on very small screens if needed, or styled smaller */}
           <div className="hidden md:block">
             <CountdownTimer />
           </div>
@@ -150,7 +162,6 @@ export default function Header() {
         </div>
       </div>
 
-      {/* MOBILE MENU OVERLAY */}
       {isMenuOpen && (
         <div
           className="fixed inset-0 bg-black/95 z-40 flex flex-col items-center justify-center md:hidden"

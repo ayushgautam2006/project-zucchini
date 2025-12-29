@@ -193,7 +193,7 @@ export default function MunRegistrationForm({
             />
             <span className="ml-2 text-sm text-gray-700">
               I confirm that the information provided is correct and I agree to follow NITRUTSAV
-              rules & code of conduct <span className="text-red-500">*</span>
+              rules & code of conduct <span className="asterisk-icon">*</span>
             </span>
           </label>
           {errors.agreedToTerms && (

@@ -69,7 +69,7 @@ export function CollegeInfoSection({
         {/* Institute Name - Searchable Dropdown for College, Text for School */}
         <div className="md:col-span-2">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Institute Name <span className="text-red-500">*</span>
+            Institute Name <span className="asterisk-icon">*</span>
           </label>
           {formData.studentType !== "SCHOOL" && !isNitrStudent ? (
             <SearchableSelect
@@ -134,7 +134,7 @@ export function CollegeInfoSection({
         {/* University/Board - Auto-filled for College, Editable for School */}
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            University / Board <span className="text-red-500">*</span>
+            University / Board <span className="asterisk-icon">*</span>
           </label>
           <input
             type="text"
@@ -158,7 +158,7 @@ export function CollegeInfoSection({
         {/* City */}
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            City <span className="text-red-500">*</span>
+            City <span className="asterisk-icon">*</span>
           </label>
           <input
             type="text"
@@ -177,7 +177,7 @@ export function CollegeInfoSection({
         {/* State */}
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            State <span className="text-red-500">*</span>
+            State <span className="asterisk-icon">*</span>
           </label>
           <input
             type="text"
@@ -196,7 +196,7 @@ export function CollegeInfoSection({
         {/* ID Card Upload */}
         <div className="md:col-span-2">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            College/University ID Card <span className="text-red-500">*</span>
+            College/University ID Card <span className="asterisk-icon">*</span>
           </label>
           <CloudinaryUploader
             maxFiles={1}
