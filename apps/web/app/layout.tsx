@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { baloo, inriaSans } from "@/fonts";
+import { fonts } from "@/fonts";
 import { Toaster } from "sonner";
 import { AuthProvider } from "@/contexts/auth-context";
+import Header from "../components/marginals/navbar2";
 export const metadata: Metadata = {
   title: "Nitrutsav 2026 | Literary and Cultural Fest - NIT Rourkela",
   description:
@@ -17,10 +18,26 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${baloo.variable} ${inriaSans.variable}`}>
+      <body className={`${fonts}`}>
         <AuthProvider>
+          <Header />
           {children}
-          <Toaster position="top-right" richColors />
+          <Toaster
+            position="top-right"
+            richColors
+            toastOptions={{
+              style: {
+                background: "rgba(255, 255, 255, 0.25)",
+                backdropFilter: "blur(9.25px)",
+                border: "2px solid rgba(255, 255, 255, 0.4)",
+                borderRadius: "13px",
+                color: "#fff",
+                fontFamily: "var(--font-inria)",
+                fontWeight: "500",
+              },
+              className: "font-inria",
+            }}
+          />
         </AuthProvider>
       </body>
     </html>

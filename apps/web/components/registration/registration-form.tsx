@@ -27,11 +27,11 @@ export default function RegistrationForm({ user, onComplete }: RegistrationFormP
   } = useRegistrationForm({ user, onComplete });
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-4">
       <NitrToggle isNitrStudent={isNitrStudent} onToggle={setIsNitrStudent} />
 
       {/* Basic Information */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {renderFormFields(
           registrationFields
             .filter((field) => field.name !== "institute" && field.name !== "university")
@@ -52,35 +52,41 @@ export default function RegistrationForm({ user, onComplete }: RegistrationFormP
         />
       </div>
 
-      {/* ID Card Upload */}
-      <DocumentUpload
-        label="College/University ID Card"
-        value={formData.idCard}
-        error={errors.idCard}
-        onUploadComplete={(url) => handleInputChange("idCard", url)}
-      />
-
-      {/* Permission Document Upload - Only for non-NITR students */}
-      {!isNitrStudent && (
+      {/* Document Uploads - Compact Layout */}
+      <div className={`grid grid-cols-1 ${!isNitrStudent ? "md:grid-cols-3" : ""} gap-4`}>
+        {/* ID Card Upload */}
         <DocumentUpload
-          label="Permission Document from Institute"
-          description="Upload a signed permission letter from your institute's authority"
-          value={formData.permission as any}
-          error={errors.permission}
-          onUploadComplete={(url) => handleInputChange("permission", url)}
+          label="College/University ID Card"
+          value={formData.idCard}
+          error={errors.idCard}
+          onUploadComplete={(url) => handleInputChange("idCard", url)}
+          compact
         />
-      )}
 
-      {/* Undertaking Document Upload - Only for non-NITR students */}
-      {!isNitrStudent && (
-        <DocumentUpload
-          label="Undertaking Document"
-          description="Upload a signed undertaking/declaration document accepting terms and conditions"
-          value={formData.undertaking as any}
-          error={errors.undertaking}
-          onUploadComplete={(url) => handleInputChange("undertaking", url)}
-        />
-      )}
+        {/* Permission Document Upload - Only for non-NITR students */}
+        {!isNitrStudent && (
+          <DocumentUpload
+            label="Permission Document"
+            description="Signed permission from institute"
+            value={formData.permission as any}
+            error={errors.permission}
+            onUploadComplete={(url) => handleInputChange("permission", url)}
+            compact
+          />
+        )}
+
+        {/* Undertaking Document Upload - Only for non-NITR students */}
+        {!isNitrStudent && (
+          <DocumentUpload
+            label="Undertaking Document"
+            description="Signed declaration document"
+            value={formData.undertaking as any}
+            error={errors.undertaking}
+            onUploadComplete={(url) => handleInputChange("undertaking", url)}
+            compact
+          />
+        )}
+      </div>
 
       <ErrorDisplay error={submitError} />
       <SubmitButton

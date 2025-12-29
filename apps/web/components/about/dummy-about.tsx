@@ -1,20 +1,17 @@
-import { H2, P } from "@repo/ui/core/typography";
-
 export default function DummyAbout() {
   return (
-    <section className="bg-gray-50 border-b min-h-screen flex items-center justify-center border-gray-200 py-20">
-      <div className="max-w-4xl mx-auto px-6">
-        <H2 className="text-4xl font-bold text-gray-900 mb-6 text-center">
-          About NITRUTSAV&apos;26
-        </H2>
-        <P className="text-lg text-gray-700 leading-relaxed text-left">
-          NITRUTSAV&apos;26 is the annual cultural extravaganza of NIT Rourkela — a celebration of
-          creativity, talent, and youthful spirit. Bringing together artists, performers, and
-          innovators from across the nation, the fest promises three days of high-energy events,
-          captivating performances, and unforgettable experiences. With a renewed vision and bigger
-          stage, NITRUTSAV&apos;26 aims to redefine fest culture and create memories that last a
-          lifetime.
-        </P>
+    <section className="flex items-center justify-center font-inria w-full">
+      <div className="max-w-4xl mx-auto w-full">
+        <p className="text-sm sm:text-base lg:text-lg leading-relaxed text-left text-white gradient-border p-4 sm:p-6 lg:p-8">
+          NITRUTSAV 2026: Odisha&apos;s grandest literary and cultural spectacle returns with an
+          eerie twist—&ldquo;Mythica: Shadows of the Past and Magic of the Future.&rdquo; From 7th
+          to 9th February, 2026, the National Institute of Technology, Rourkela, becomes a portal to
+          a realm where ancient secrets collide with forbidden magic. Unravel the mysteries of
+          long-forgotten legends, venture into the shadows of the unknown, and awaken the arcane
+          forces that blur the line between past and future. Prepare for a spine-chilling journey
+          through myth and mystery—where every whisper hides a story, and every shadow holds a
+          secret. Dare to join us?
+        </p>
       </div>
     </section>
   );

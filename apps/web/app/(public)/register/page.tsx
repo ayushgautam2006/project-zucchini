@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { signInWithGoogle } from "@repo/firebase-config";
 import { useApi } from "@repo/shared-utils";
@@ -12,6 +11,7 @@ import {
   PaymentStep,
   CompleteStep,
 } from "@/components/registration";
+import SectionHeading from "@/components/ui/section-heading";
 
 type RegistrationStep = "auth" | "form" | "payment" | "complete";
 
@@ -121,13 +121,11 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-2xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-1">Register for NITRUTSAV 2026</h1>
-        </div>
+    <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 relative overflow-hidden reg-bg-image">
+      <div className="max-w-full mx-auto relative z-10 mt-24">
+        <SectionHeading title="Registrations" />
         <ProgressBar currentStep={currentStep} />
-        <div className=" border border-gray-200 rounded-lg p-8">
+        <div className="max-w-5xl mx-auto p-6 font-inria form-container gradient-border">
           {currentStep === "auth" && (
             <AuthStep onGoogleSignIn={handleGoogleSignIn} isLoading={isLoading} error={error} />
           )}
