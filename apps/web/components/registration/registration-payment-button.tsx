@@ -12,6 +12,7 @@ interface RegistrationPaymentButtonProps {
   committeeChoice?: string;
   type?: string;
   teamId?: string;
+  wantsAccommodation?: boolean;
 }
 
 export default function RegistrationPaymentButton({
@@ -22,6 +23,7 @@ export default function RegistrationPaymentButton({
   committeeChoice,
   type,
   teamId,
+  wantsAccommodation,
 }: RegistrationPaymentButtonProps) {
   const { execute, loading: isLoading } = useApi({
     onError(error) {
@@ -44,6 +46,7 @@ export default function RegistrationPaymentButton({
         isCollegeStudent,
         committeeChoice,
         teamId,
+        wantsAccommodation,
       }),
     });
 

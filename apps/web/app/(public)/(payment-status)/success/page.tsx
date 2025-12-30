@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { Suspense, useEffect, useState } from "react";
 import { useAuth } from "@/contexts/auth-context";
 import { useSearchParams, useRouter } from "next/navigation";
-import { Check, X, Home } from "lucide-react";
+import { Check, X, Home, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 interface TransactionDetails {
@@ -20,9 +20,8 @@ function SuccessContent() {
   const [paymentStatus, setPaymentStatus] = useState<"success" | "failure" | "pending">("pending");
   const [transactionDetails, setTransactionDetails] = useState<TransactionDetails | null>(null);
   const searchParams = useSearchParams();
-  const router = useRouter();
   const { user, isLoading: authLoading } = useAuth();
-
+  const [fromMUN, setFromMUN] = useState(false);
   const { execute, loading: isLoading } = useApi({
     onError(error) {
       toast.error(error || "Failed to verify payment!");
@@ -38,6 +37,7 @@ function SuccessContent() {
           setPaymentStatus("failure");
           return;
         }
+        setFromMUN(txnid?.includes("MUN"));
 
         const res = await execute(`verify?txnid=${txnid}`, {
           method: "GET",
@@ -94,11 +94,11 @@ function SuccessContent() {
               </div>
             )}
             <Link
-              href={"/"}
-              className="gradient-border-btn w-full mt-6 py-3 px-6 text-white font-semibold hover:bg-white/30 transition-all duration-200 flex items-center justify-center gap-2"
+              href={fromMUN ? "/register/mun" : "/register"}
+              className="gradient-border-btn w-full mt-6 py-3 px-6 text-white font-semibold hover:bg-white/30 transition-all duration-200 flex items-center justify-center gap-2 font-inria"
             >
-              <Home className="w-5 h-5" />
-              Go to Home
+              <ArrowLeft className="w-5 h-5" />
+              Go Back
             </Link>
           </>
         ) : (
@@ -113,11 +113,11 @@ function SuccessContent() {
               Unable to verify your payment. Please contact support if amount was deducted.
             </p>
             <Link
-              href={"/"}
+              href={fromMUN ? "/register/mun" : "/register"}
               className="gradient-border-btn w-full mt-6 py-3 px-6 text-white font-semibold hover:bg-white/30 transition-all duration-200 flex items-center justify-center gap-2 font-inria"
             >
-              <Home className="w-5 h-5" />
-              Go to Home
+              <ArrowLeft className="w-5 h-5" />
+              Go Back
             </Link>
           </>
         )}

@@ -18,6 +18,7 @@ type RegistrationStep = "auth" | "form" | "payment" | "complete";
 export interface UserData {
   name: string;
   email: string;
+  wantsAccommodation?: boolean;
 }
 
 interface CheckRegistrationResponse {
@@ -36,6 +37,7 @@ export default function RegisterPage() {
   const { user, isLoading: authLoading } = useAuth();
   const [currentStep, setCurrentStep] = useState<RegistrationStep>("auth");
   const [userData, setUserData] = useState<UserData | null>(null);
+  const [userId, setUserId] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [paymentError, setPaymentError] = useState<string | null>(null);
@@ -60,6 +62,7 @@ export default function RegisterPage() {
             name: result.data.name!,
             email: result.data.email!,
           });
+          setUserId(result.data.userId);
 
           if (
             result.data.isPaymentVerified ||
@@ -99,10 +102,14 @@ export default function RegisterPage() {
     }
   };
 
-  const handleRegistrationComplete = (isNitrStudent: boolean = false) => {
+  const handleRegistrationComplete = (
+    isNitrStudent: boolean = false,
+    wantsAccommodation: boolean = false
+  ) => {
     setUserData({
       name: user?.displayName || "",
       email: user?.email || "",
+      wantsAccommodation,
     });
 
     if (isNitrStudent) {
@@ -142,7 +149,7 @@ export default function RegisterPage() {
             />
           )}
 
-          {currentStep === "complete" && <CompleteStep />}
+          {currentStep === "complete" && <CompleteStep userId={userId} />}
         </div>
       </div>
     </div>

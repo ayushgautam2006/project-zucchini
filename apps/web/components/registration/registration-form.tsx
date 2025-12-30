@@ -4,13 +4,15 @@ import { type User } from "@repo/firebase-config";
 import { registrationFields } from "@/config/register";
 import { renderFormFields, SubmitButton, ErrorDisplay } from "@/utils/form";
 import { useRegistrationForm } from "@/hooks/use-registration-form";
+import { NITRUTSAV_FEES } from "@/config";
 import NitrToggle from "./nitr-toggle";
+import AccommodationSelector from "./accommodation-selector";
 import InstituteField from "./institute-field";
 import DocumentUpload from "./document-upload";
 
 interface RegistrationFormProps {
   user: User;
-  onComplete: (isNitrStudent: boolean) => void;
+  onComplete: (isNitrStudent: boolean, wantsAccommodation: boolean) => void;
 }
 
 export default function RegistrationForm({ user, onComplete }: RegistrationFormProps) {
@@ -18,13 +20,19 @@ export default function RegistrationForm({ user, onComplete }: RegistrationFormP
     formData,
     errors,
     isNitrStudent,
+    wantsAccommodation,
     isSubmitting,
     submitError,
     setIsNitrStudent,
+    setWantsAccommodation,
     handleInputChange,
     handleInstituteChange,
     handleSubmit,
   } = useRegistrationForm({ user, onComplete });
+
+  const registrationFee = wantsAccommodation
+    ? NITRUTSAV_FEES.withAccomodation
+    : NITRUTSAV_FEES.withoutAccomodation;
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -50,6 +58,14 @@ export default function RegistrationForm({ user, onComplete }: RegistrationFormP
           onInstituteChange={handleInstituteChange}
           onUniversityChange={(v) => handleInputChange("university", v)}
         />
+
+        {/* Accommodation Selection - Only for non-NITR students */}
+        {!isNitrStudent && (
+          <AccommodationSelector
+            wantsAccommodation={wantsAccommodation}
+            onToggle={setWantsAccommodation}
+          />
+        )}
       </div>
 
       {/* Document Uploads - Compact Layout */}
@@ -89,6 +105,22 @@ export default function RegistrationForm({ user, onComplete }: RegistrationFormP
       </div>
 
       <ErrorDisplay error={submitError} />
+
+      {/* Pricing Summary - Only for non-NITR students */}
+      {!isNitrStudent && (
+        <div className="border-2 border-white/40 rounded-[13px] p-4 bg-white/25 backdrop-blur-[9.25px]">
+          <div className="flex justify-between items-center">
+            <div>
+              <p className="text-sm text-white/80">Registration Fee</p>
+              <p className="text-xs text-white/60">
+                {wantsAccommodation ? "With Accommodation" : "Without Accommodation"}
+              </p>
+            </div>
+            <p className="text-2xl font-bold text-white">₹{registrationFee}</p>
+          </div>
+        </div>
+      )}
+
       <SubmitButton
         isSubmitting={isSubmitting}
         loadingText="Registering..."

@@ -35,7 +35,7 @@ export function MunDetailsSection({ formData, errors, handleFieldChange }: MunDe
               </p>
             )}
             {formData.committeeChoice === "MOOT_COURT" && (
-              <p className="mt-1 text-sm text-blue-600">
+              <p className="mt-1 text-sm text-white">
                 Note: For MOOT Court, you will register as team leader and provide details of 2
                 teammates (2 speakers + 1 researcher)
               </p>

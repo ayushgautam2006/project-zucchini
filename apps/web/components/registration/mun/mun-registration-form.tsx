@@ -10,6 +10,7 @@ import { useMunFormValidation } from "@/hooks/use-mun-form-validation";
 import { NitrCheckbox } from "./nitr-checkbox";
 import { CollegeInfoSection } from "./college-info-section";
 import { MunDetailsSection } from "./mun-details-section";
+import { MUN_FEE } from "@/config";
 
 interface MunRegistrationFormProps {
   user: User;
@@ -199,6 +200,26 @@ export default function MunRegistrationForm({
       </div>
 
       <ErrorDisplay error={submitError} />
+
+      {formData.studentType && !isNitrStudent && (
+        <div className="bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3 border border-white/10">
+          <div className="flex items-center justify-between text-white font-inria">
+            <span>
+              Registration Fee
+              {formData.committeeChoice === "MOOT_COURT" && (
+                <span className="text-white/70 text-sm ml-1">(× 3 team members)</span>
+              )}
+            </span>
+            <span className="text-lg font-semibold">
+              ₹
+              {(
+                (formData.studentType === "COLLEGE" ? MUN_FEE.college : MUN_FEE.school) *
+                (formData.committeeChoice === "MOOT_COURT" ? 3 : 1)
+              ).toLocaleString("en-IN")}
+            </span>
+          </div>
+        </div>
+      )}
 
       <div className="flex justify-between items-center pt-4">
         {onBack && (
