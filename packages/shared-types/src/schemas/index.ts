@@ -4,7 +4,7 @@ import { z } from "zod";
  * Blocked institutes list
  * Students from these institutes are not allowed to register
  */
-const notAllowedInstitutes = [
+export const notAllowedInstitutes = [
   "Siksha O Anusandhan",
   "Siksha 'O' Anusandhan",
   'Siksha "O" Anusandhan',
@@ -71,7 +71,7 @@ const MESSAGES = {
   REQUIRED: (field: string) => `${field} is required`,
   INVALID: (field: string) => `Invalid ${field.toLowerCase()}`,
   INSTITUTE_BANNED:
-    "Students from this institute/university have been officially barred from participating in INNO'24",
+    "Students from this institute/university have been officially barred from participating in NITRUTSAV'26",
   PERMISSION_REQUIRED: "You must have permission from your institute's authority",
   TERMS_REQUIRED: "You must agree to the terms and conditions",
   GENDER_REQUIRED: "Gender selection is required and must be either male or female",
@@ -119,7 +119,7 @@ export const RegistrationSchema = z.object({
 
   idCard: z.string().url(MESSAGES.REQUIRED("ID Card")),
 
-  payment: z.string().url(MESSAGES.REQUIRED("Payment receipt")),
+  // payment: z.string().url(MESSAGES.REQUIRED("Payment receipt")),
 
   rollNumber: z.string().min(1, MESSAGES.REQUIRED("Roll number")),
 
@@ -129,21 +129,17 @@ export const RegistrationSchema = z.object({
     .optional()
     .or(z.literal("")),
 
-  permission: z.boolean().refine((val) => val === true, {
-    message: MESSAGES.PERMISSION_REQUIRED,
-  }),
+  permission: z.string().url(MESSAGES.REQUIRED("Permission document")),
 
   gender: z.enum(["MALE", "FEMALE"], {
     errorMap: () => ({ message: MESSAGES.GENDER_REQUIRED }),
   }),
 
-  undertaking: z.boolean().refine((val) => val === true, {
-    message: MESSAGES.TERMS_REQUIRED,
-  }),
+  undertaking: z.string().url(MESSAGES.REQUIRED("Undertaking document")),
 
-  campusAmbassador: z.boolean().optional(),
+  wantsAccommodation: z.boolean().optional().default(false),
 
-  transactionID: z.string().min(1, MESSAGES.REQUIRED("Transaction ID")),
+  // transactionID: z.string().min(1, MESSAGES.REQUIRED("Transaction ID")),
 
   registeredAt: z
     .date()
@@ -164,3 +160,11 @@ export type Registration = z.infer<typeof RegistrationSchema>;
 export const schemas = {
   Registration: RegistrationSchema,
 };
+
+// MUN Registration Schema
+export {
+  MunRegistrationSchema,
+  type MunRegistration,
+  TeamMunRegistrationSchema,
+  type TeamMunRegistration,
+} from "./mun-registration";

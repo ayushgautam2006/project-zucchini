@@ -1,0 +1,27 @@
+{
+  "name": "@repo/database",
+  "version": "1.0.0",
+  "description": "Shared database configuration and schema for project-zucchini",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "db:generate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.37.0",
+    "pg": "^8.13.1",
+    "dotenv": "^16.4.7",
+    "@repo/shared-types": "workspace:*"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/pg": "^8.11.10",
+    "drizzle-kit": "^0.30.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

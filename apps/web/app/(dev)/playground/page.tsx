@@ -1,7 +1,12 @@
-export default function Playground() {
+import HeroWrapper from "@/components/hero/hero-wrapper";
+import About from "@/components/about/about";
+const Playground = () => {
   return (
-    <main>
-      <h1>Playground Page</h1>
-    </main>
+    <div>
+      <HeroWrapper />
+      <About />
+    </div>
   );
-}
+};
+
+export default Playground;

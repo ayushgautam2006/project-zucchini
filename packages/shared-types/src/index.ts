@@ -1,6 +1,12 @@
 import { type ZodSchema, type ZodError } from "zod";
 
 export { RegistrationSchema, type Registration, schemas } from "./schemas";
+export {
+  MunRegistrationSchema,
+  type MunRegistration,
+  TeamMunRegistrationSchema,
+  type TeamMunRegistration,
+} from "./schemas";
 
 export class ValidationError extends Error {
   constructor(
@@ -53,3 +59,19 @@ export function handleError(error: unknown, defaultMessage = "Operation failed")
   }
   throw error;
 }
+
+export class ApiError extends Error {
+  constructor(
+    public readonly statusCode: number,
+    message: string,
+    public readonly details?: unknown
+  ) {
+    super(message);
+    this.name = "ApiError";
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, ApiError);
+    }
+  }
+}
+
+export const isApiError = (error: unknown): error is ApiError => error instanceof ApiError;
