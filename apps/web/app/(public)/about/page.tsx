@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ContactSection from "@/components/about/contact";
 import DummyAbout from "@/components/about/dummy-about";
+import InstituteOfficials from "@/components/about/institute-officials";
 import { SectionHeading } from "@/components/ui";
 
 export const metadata: Metadata = {
@@ -22,6 +23,16 @@ export default function AboutPage() {
         </div>
         <div className="min-h-screen flex flex-col justify-center items-center">
           <div className="w-full">
+            <SectionHeading
+              title="INSTITUTE OFFICIALS"
+              className="text-center"
+              containerClassName="mb-20"
+            />
+            <InstituteOfficials />
+          </div>
+        </div>
+        <div className="min-h-screen flex flex-col justify-center items-center">
+          <div className="w-full">
             {" "}
             <SectionHeading
               title="CONTACT US "
@@ -32,7 +43,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="mt-20">d</div>
+        {/* <div className="mt-20"></div> */}
       </div>
     </main>
   );

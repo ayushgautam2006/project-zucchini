@@ -13,8 +13,6 @@ import EventSwiper from "./eventswiper";
 import EventInfo from "./eventinfo";
 import EventCategory from "./eventcatagory";
 import { useState, useRef, useEffect } from "react";
-import { inriaSans, calistoga, berkshireSwash, baloo } from "@/fonts";
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
 // Category Mapping
@@ -43,7 +41,7 @@ export default function Event() {
   }, [activeIndex]);
 
   return (
-    <div className="relative w-full min-h-screen overflow-hidden bg-black">
+    <div className="relative w-full min-h-screen overflow-hidden bg-black pt-20">
       {/* BACKGROUNDS */}
       <Image
         src={Images.BackgroundImg2}

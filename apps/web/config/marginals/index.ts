@@ -9,7 +9,7 @@ export const navItems = [
   },
   {
     label: "Events",
-    href: "/coming-soon",
+    href: "/events",
   },
   // {
   //   label: "FAQs",
