@@ -3,13 +3,17 @@
 * {
   box-sizing: border-box;
 }
+
 body {
   padding: 0;
   margin: 0;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
   overflow-x: hidden;
 }
+
 body::-webkit-scrollbar {
   display: none;
   width: 0;
@@ -439,10 +443,16 @@ html::-webkit-scrollbar {
 }
 
 .step-indicator-progress-bar {
-  width: 92px;
+  width: 30px;
   height: 1px;
   background: rgba(255, 255, 255, 0.38);
   overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .step-indicator-progress-bar {
+    width: 92px;
+  }
 }
 
 .step-indicator-progress-bar-active {
@@ -723,11 +733,11 @@ html::-webkit-scrollbar {
 }
 
 .hero-bg {
-  background-image: url("https://res.cloudinary.com/drf3eatfm/image/upload/v1767262034/nitrutsav-2026/pmlogcv1tcfjwujylf19.webp");
-  background-size: 102% auto;
+  background-image: url("https://res.cloudinary.com/drf3eatfm/image/upload/v1767480320/nitrutsav-2026/p4jg8k1n7pzfmatlttg0.png");
+  /* background-size: auto 100%; */
   background-position: center -15;
+  background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: scroll;
 }
 
 .primary-button-gradient {
@@ -767,6 +777,7 @@ html::-webkit-scrollbar {
   mask-composite: exclude;
   pointer-events: none;
 }
+
 .primary-button {
   display: flex;
   width: 308px;
