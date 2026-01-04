@@ -21,7 +21,7 @@ export const contactsFirstRow: ContactPerson[] = [
     role: "(Convenor-NITRUTSAV)",
     phone: "+91-8267862398",
     image:
-      "https://res.cloudinary.com/drf3eatfm/image/upload/v1767139442/nitrutsav-2026/eo2bsfu5xno4fe0dqrse.jpg",
+      "https://res.cloudinary.com/dz4lwydkp/image/upload/v1767477421/nitrutsav-2026/ovwfvrsrhkkw4iigcdzk.jpg",
   },
 ];
 

@@ -7,6 +7,7 @@ import { EventCategoryProvider } from "@/contexts/event-category-context";
 import Header from "../components/marginals/navbar";
 import Footer from "../components/marginals/footer";
 import HOC from "@/components/hoc";
+import { AudioProvider } from "@/contexts/audio-context";
 export const metadata: Metadata = {
   title: "Nitrutsav 2026 | Literary and Cultural Fest - NIT Rourkela",
   description:
@@ -26,11 +27,13 @@ export default function RootLayout({
       <body className={`${fonts}`}>
         <AuthProvider>
           <EventCategoryProvider>
-            <HOC>
-              <Header />
-              {children}
-              <Footer />
-            </HOC>
+            <AudioProvider>
+              <HOC>
+                <Header />
+                {children}
+                <Footer />
+              </HOC>
+            </AudioProvider>
 
             <Toaster
               position="top-right"

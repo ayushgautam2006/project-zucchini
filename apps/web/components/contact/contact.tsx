@@ -11,9 +11,9 @@ export default function ContactSection() {
           ))}
         </div>
 
-        {contactsSecondRow.map((contact) => (
+        {/* {contactsSecondRow.map((contact) => (
           <ContactCard key={contact.id} contact={contact} />
-        ))}
+        ))} */}
       </div>
     </section>
   );

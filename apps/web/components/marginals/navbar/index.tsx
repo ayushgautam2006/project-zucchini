@@ -80,7 +80,7 @@ export default function Header() {
             />
           </Link>
 
-          <nav className="hidden md:flex gap-8 lg:gap-12 text-white font-inria">
+          <nav className="hidden md:flex gap-5 lmd:gap-8 lg:gap-12 text-white font-inria">
             {navItems.map((item) => {
               const isActive = isActiveRoute(item.href);
               return (
@@ -105,14 +105,14 @@ export default function Header() {
           </nav>
         </div>
 
-        <div className="flex items-center gap-4 md:gap-12">
+        <div className="flex items-center gap-4 lg:gap-12">
           <div className="hidden md:block">
             <CountdownTimer />
           </div>
 
-          {/* <div className="hidden md:block">
+          <div className="hidden md:block">
             <MusicVisualizer />
-          </div> */}
+          </div>
 
           {/* Mobile Event Category Button - Only visible on events page */}
           {isEventsPage && (
