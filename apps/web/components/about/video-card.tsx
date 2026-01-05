@@ -12,7 +12,7 @@ export default function VideoCard({
   const { 1: length1, 2: length2, 3: length3 } = length;
   const url = "https://www.youtube.com/embed/tf1e1E3EwZE";
   return (
-    <div className=" flex flex-col items-center  w-lg lmd:w-md llg:w-[32rem] gap-2">
+    <div className=" flex flex-col items-center  w-lg lmd:w-md llg:w-[32rem] gap-2 ">
       <div className="w-full relative">
         <div className="absolute -top-12 z-10 lsm:block hidden">
           <Lines length={length1} direction="horizontal" flowDirection="rtl" />
@@ -32,9 +32,9 @@ export default function VideoCard({
         <div className="absolute -bottom-4 right-0 z-10 lsm:block hidden">
           <Lines length={length3} direction="horizontal" flowDirection="ltr" />
         </div>
-        <div className="video-card-body relative w-full aspect-video overflow-hidden">
+        <div className="video-card-body relative w-full aspect-video overflow-clip">
           <iframe
-            className="w-full h-full outline-none border-none -z-10 absolute"
+            className="w-full h-full outline-none border-none -z-10 absolute "
             src={url}
             title="NITRUTSAV Video"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

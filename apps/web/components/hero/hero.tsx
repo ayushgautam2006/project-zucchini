@@ -13,7 +13,6 @@ import {
   Parrot,
 } from "./layers";
 import FireworksEffect from "@/components/coming-soon/fireworks-effects";
-import { LightStrings } from "./light-strings";
 import Button from "../ui/button";
 import Link from "next/link";
 
@@ -22,10 +21,13 @@ export default function Hero() {
   const { mouse, scrollY } = useParallax(containerRef);
 
   return (
-    <main ref={containerRef} className="h-screen w-full relative z-10">
+    <main
+      ref={containerRef}
+      className="h-screen w-screen overflow-visible relative 2xl:max-h-[56.25vw] 2xl:min-h-[56.25vw]"
+    >
       <FireworksEffect />
 
-      {/* <BackgroundLayer mouse={mouse} scrollY={scrollY} /> */}
+      <BackgroundLayer mouse={mouse} scrollY={scrollY} />
 
       <PeacockLeftLayer mouse={mouse} scrollY={scrollY} />
       <PeacockRightLayer mouse={mouse} scrollY={scrollY} />
@@ -38,9 +40,11 @@ export default function Hero() {
 
       <GirlLayer mouse={mouse} scrollY={scrollY} />
 
-      <div className="absolute md:bottom-30 bottom-30 left-1/2 -translate-x-1/2 z-34">
+      <div className="absolute md:bottom-15 bottom-15 left-1/2 -translate-x-1/2 z-34 mb-12">
         <Link href="/register">
-          <Button className="h-[50px] w-[200px] lg:h-[75px] lg:w-[275px]"></Button>
+          <Button className="h-[56px] md:h-[75px] w-[200px] md:w-[275px] text-white">
+            Register Now
+          </Button>
         </Link>
       </div>
       {/* <GradientOverlay /> */}

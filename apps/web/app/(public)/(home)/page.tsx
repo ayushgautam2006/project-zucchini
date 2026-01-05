@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
-import Hero from "@/components/hero_v2";
+import Hero from "@/components/hero";
 import NitrutsavText from "@/components/hero/nitrutsav-text";
 import Image from "next/image";
 import { HERO_IMAGES } from "@/config/hero";
@@ -138,16 +138,14 @@ export default function Home() {
                   >
                     WELCOME TO THE CARNIVAL OF COLORS
                   </motion.span>
-                  <motion.span
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-2 text-xs lsm:text-sm llsmd:text-base opacity-70 whitespace-nowrap"
+                  <motion.button
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-20 text-sm lsm:text-base llsmd:text-lg opacity-100 whitespace-nowrap border-2 border-black px-3 py-2 w-full lsm:w-[200px]"
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: [0, 0.7, 0.4, 0.7] }}
-                    transition={{
-                      opacity: { duration: 2, repeat: Infinity, repeatType: "reverse" },
-                    }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1, ease: "easeOut" }}
                   >
-                    Click anywhere or press Enter to continue
-                  </motion.span>
+                    Enter
+                  </motion.button>
                 </>
               )}
             </div>

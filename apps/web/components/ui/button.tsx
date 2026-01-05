@@ -22,7 +22,7 @@ export default function Button({ children = "Register Now", className, ...props 
         <ActiveButton />
       </div>
 
-      <span className="relative z-10 font-inria text-[25px] font-[700] text-white tracking-wide transition-all duration-300 group-hover:[text-shadow:0_0_8px_rgba(255,255,255,0.4),0_0_15px_rgba(255,255,255,0.3),0_0_20px_rgba(255,255,255,0.2)]">
+      <span className="relative z-10 font-inria text-[20px] md:text-[25px] font-[700] text-white tracking-wide transition-all duration-300 group-hover:[text-shadow:0_0_8px_rgba(255,255,255,0.4),0_0_15px_rgba(255,255,255,0.3),0_0_20px_rgba(255,255,255,0.2)]">
         {children}
       </span>
     </button>

@@ -20,7 +20,7 @@ export function ContactCard({ contact }: ContactCardProps) {
           )}
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center text-center gap-1">
+      <div className="flex flex-col justify-center items-center text-center gap-1 z-50">
         <h1 className="text-white font-semibold text-base sm:text-lg lg:text-xl">{contact.name}</h1>
         <h2 className="text-white/80 text-sm sm:text-base lg:text-lg">{contact.role}</h2>
         <h2 className="text-white font-semibold text-base sm:text-lg lg:text-xl">

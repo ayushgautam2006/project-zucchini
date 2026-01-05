@@ -26,8 +26,8 @@ export default function AccommodationSelector({
         disabled={disabled}
       />
       <div className="text-xs text-white/60 flex gap-2 flex-col">
-        <span>With Accomodation : ₹849</span>
-        <span>Without Accomodation : ₹1099</span>
+        <span>With Accomodation : ₹1099</span>
+        <span>Without Accomodation : ₹849</span>
       </div>
     </div>
   );

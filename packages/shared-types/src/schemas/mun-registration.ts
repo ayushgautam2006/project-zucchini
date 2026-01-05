@@ -79,6 +79,7 @@ export const MunRegistrationSchema = z
       "AIPPM_OVERNIGHT_CRISIS",
       "MOOT_COURT",
     ]),
+    preferredPortfolio: z.string().min(1, "Preferred portfolio is required"),
     hasParticipatedBefore: z.boolean(),
 
     // Emergency

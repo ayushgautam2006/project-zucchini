@@ -101,6 +101,7 @@ export const munRegistrationsTable = pgTable("mun_registrations", {
   idCard: text().notNull(),
 
   committeeChoice: munCommitteeEnum().notNull(),
+  preferredPortfolio: text().notNull(),
   hasParticipatedBefore: boolean().notNull(),
 
   emergencyContactName: varchar({ length: 255 }).notNull(),

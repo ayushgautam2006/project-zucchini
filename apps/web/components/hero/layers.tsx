@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { HERO_IMAGES, PARALLAX_MOUSE, PARALLAX_SCROLL, TRANSITIONS } from "@/config/hero";
 import { cn } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { useIsMobile } from "@/hooks/use-is-mobile";
 
 interface ParallaxLayerProps {
   mouse: { x: number; y: number };
@@ -9,24 +9,22 @@ interface ParallaxLayerProps {
 }
 
 export function BackgroundLayer({ mouse, scrollY }: ParallaxLayerProps) {
+  const isMobile = useIsMobile();
   return (
     <div
-      className="absolute inset-0 z-[10] pointer-events-none"
+      className="absolute inset-0 z-10 pointer-events-none h-[110vh] overflow-visible"
       style={{
         transform: `translate(${mouse.x * PARALLAX_MOUSE.background.x}vw, ${mouse.y * PARALLAX_MOUSE.background.y}vw) translateY(${scrollY * PARALLAX_SCROLL.background}px)`,
         transition: `transform ${TRANSITIONS.background}s ease-out`,
       }}
     >
       <Image
-        src={HERO_IMAGES.background}
+        src={isMobile ? HERO_IMAGES.backgroundMobile : HERO_IMAGES.background}
         alt="Background"
         fill
-        className="object-cover object-center scale-110 blur-[2px] brightness-110 saturate-125"
+        className="object-cover object-top scale-105"
         priority
       />
-      {/* Glow overlay */}
-      <div className="absolute inset-0 bg-gradient-radial from-white/10 via-transparent to-transparent mix-blend-overlay" />
-      <div className="absolute inset-0 backdrop-blur-[1px]" />
     </div>
   );
 }
@@ -88,22 +86,20 @@ export function OwlRightDecorationLayer({ mouse, scrollY }: ParallaxLayerProps) 
 }
 
 export function GirlLayer({ mouse, scrollY }: ParallaxLayerProps) {
-  const [isTallScreen, setIsTallScreen] = useState(false);
-
-  useEffect(() => {
-    setIsTallScreen(window.screen.height > 800);
-  }, []);
-
+  const isMobile = useIsMobile();
   return (
     <div
       className={cn(
-        "absolute left-1/2 md:bottom-[-5vw] h-[60vh] w-[60vh] ssm:h-[120vw] ssm:w-[120vw] lsm:h-[90vw] lmd:h-[40vw] lsm:w-[90vw] llsmd:w-[55vw] llsmd:h-[55vw] md:w-[50vw] llmd:w-[60vw]  z-[1] md:z-[30] pointer-events-none",
-        isTallScreen ? "bottom-[10vh] lsm:bottom-0" : "bottom-0"
+        "absolute left-1/2 -translate-x-1/2 md:bottom-[-5vw] h-[70vh] w-[70vh] ssm:h-[70vh] ssm:w-[70vh] lsm:h-[70vh] lmd:h-[35vw] lsm:w-[70vh] llsmd:w-[70vw] llsmd:h-[80vw] md:w-[50vw] z-20 llmd:w-[60vw] pointer-events-none -bottom-20 scale-75 md:scale-100"
       )}
-      style={{
-        transform: `translateX(-50%) translate(${mouse.x * PARALLAX_MOUSE.girl.x}vw, ${mouse.y * PARALLAX_MOUSE.girl.y}vw) translateY(${scrollY * PARALLAX_SCROLL.girl}px)`,
-        transition: `transform ${TRANSITIONS.girl}s ease-out`,
-      }}
+      style={
+        isMobile
+          ? {}
+          : {
+              transform: `translate(${mouse.x * PARALLAX_MOUSE.girl.x}vw, ${mouse.y * PARALLAX_MOUSE.girl.y}vw) translateY(${scrollY * PARALLAX_SCROLL.girl}px)`,
+              transition: `transform ${TRANSITIONS.girl}s ease-out`,
+            }
+      }
     >
       <Image
         src={HERO_IMAGES.girl}
@@ -115,8 +111,7 @@ export function GirlLayer({ mouse, scrollY }: ParallaxLayerProps) {
       />
       <div
         className={cn(
-          "md:block hidden absolute left-1/2 -translate-x-1/2  w-[200%] h-[100%] bg-gradient-to-b from-transparent  to-black pointer-events-none",
-          isTallScreen ? "via-black/90 top-[60%]" : "top-[40%] via-black/90"
+          "md:block hidden absolute left-1/2 -translate-x-1/2  w-[105vw] h-[90%] bg-linear-to-b from-transparent to-black/50 pointer-events-none"
         )}
       />
     </div>
@@ -129,7 +124,7 @@ export function LogoLayer({
   children,
 }: ParallaxLayerProps & { children?: React.ReactNode }) {
   return (
-    <div className="absolute left-0 right-0 pt-20 -top-55 lsm:-top-12 llmd:-top-10 llg:-top-50 2xl:-top-80 bottom-0 flex items-center justify-center z-[25] pointer-events-none">
+    <div className="absolute left-0 right-0 -top-20 lsm:-top-12 llmd:-top-10 llg:-top-50 2xl:-top-80 bottom-0 flex items-center justify-center z-[25] pointer-events-none">
       <div
         className="flex flex-col items-center 2xl:items-start max-w-[80%] md:max-w-[50%] 2xl:max-w-[50%]"
         style={{
@@ -145,7 +140,7 @@ export function LogoLayer({
             src={HERO_IMAGES.logo}
             alt="Nitrutsav 2026"
             fill
-            className="object-contain object-center"
+            className="object-contain object-center scale-95 md:scale-125"
             priority
           />
         </div>

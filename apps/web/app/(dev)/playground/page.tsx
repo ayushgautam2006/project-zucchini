@@ -1,6 +1,6 @@
 "use client";
 
-import Hero from "@/components/hero_v2";
+import Hero from "@/components/hero";
 const Playground = () => {
   return (
     <div>

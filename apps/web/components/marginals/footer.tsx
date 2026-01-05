@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Instagram } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { footerLinks, footerImages } from "@/config/marginals/footer";
 import { WhatsAppIcon } from "@/components/ui/icons";
 import { useIsMobile } from "@/hooks/use-is-mobile";
@@ -14,8 +15,16 @@ const socialIcons: Record<string, React.ReactNode> = {
 
 export default function Footer() {
   const isMobile = useIsMobile();
+  const pathname = usePathname();
+  const isTransparent = pathname === "/";
+
   return (
-    <footer className={cn("relative w-full font-inria overflow-hidden z-50 bg-black")}>
+    <footer
+      className={cn(
+        "relative w-full font-inria overflow-hidden z-50",
+        isTransparent ? "bg-transparent" : "bg-black"
+      )}
+    >
       <div className="absolute inset-0 bg-black rounded-t-[80px] border-2 border-white overflow-hidden ">
         <div className="relative flex justify-between w-full h-full footer-pattern ">
           <div className="absolute -translate-x-1/2  scale-100 md:scale-150 flex items-center">

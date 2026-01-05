@@ -1,9 +1,7 @@
 import TitleSponsors from "@/components/sponsors/title";
 import React, { JSX } from "react";
 import PlatinumSponsors from "../../../components/sponsors/platinum";
-
-const background =
-  "https://res.cloudinary.com/drf3eatfm/image/upload/v1767283927/nitrutsav-2026/ggdb93tvuuukh6csh745.webp";
+import { background } from "@/config/sponsors";
 
 export default function SponsorsPage(): JSX.Element {
   return (

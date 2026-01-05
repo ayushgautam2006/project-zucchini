@@ -135,6 +135,14 @@ export const munDetailsFields: FieldConfig[] = [
     ],
     gridSpan: "full",
   },
+  {
+    name: "preferredPortfolio",
+    label: "Preferred Portfolio (write up to three)",
+    type: "text",
+    placeholder: "Enter your preferred portfolio preferences",
+    required: true,
+    gridSpan: "full",
+  },
 ];
 
 // Emergency & Safety Fields

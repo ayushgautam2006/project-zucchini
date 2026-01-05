@@ -26,3 +26,6 @@ export const titleSponsor = {
   href: "",
   logo: "",
 };
+
+export const background =
+  "https://res.cloudinary.com/drf3eatfm/image/upload/v1767283927/nitrutsav-2026/ggdb93tvuuukh6csh745.webp";
