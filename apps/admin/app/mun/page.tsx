@@ -373,7 +373,12 @@ export default function MunPage() {
         </div>
 
         {view === "table" ? (
-          <DataTable columns={munColumns} data={searchResults} onRowClick={handleRowClick} />
+          <>
+            <p className="text-sm text-zinc-400 mb-3">
+              💡 Click on a row to view full registration details
+            </p>
+            <DataTable columns={munColumns} data={searchResults} onRowClick={handleRowClick} />
+          </>
         ) : (
           <>
             {/* Moot Court Teams Section */}

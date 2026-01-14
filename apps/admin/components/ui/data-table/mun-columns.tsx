@@ -100,7 +100,10 @@ export const munColumns: ColumnDef<MunRegistration>[] = [
       const portfolio = row.getValue("preferredPortfolio") as string | null;
       if (!portfolio) return <span className="text-zinc-600">-</span>;
       return (
-        <span className="text-xs font-medium px-2 py-1 rounded bg-cyan-500/20 text-cyan-400">
+        <span
+          className="text-xs font-medium px-2 py-1 rounded bg-cyan-500/20 text-cyan-400 max-w-[200px] truncate block"
+          title={portfolio}
+        >
           {portfolio}
         </span>
       );
