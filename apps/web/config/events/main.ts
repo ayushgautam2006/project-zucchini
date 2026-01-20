@@ -23,10 +23,10 @@ export const MainEvents = [
     club: `Kalaam`,
     rulebook: `https://drive.google.com/open?id=11FbRfaTaCv8_sjP-rhxkrL2tPAfMooXS`,
     name: `Just A Minute (JAM)`,
-    description: `Just a Minute (JAM) is a public speaking game where parƟcipants must speak on a
-    random topic for sixty seconds. The challenge is to talk without hesitaƟon, repeƟƟon,
-    or deviaƟon. It tests mental agility, vocabulary, and composure, as opponents can
-    ""challenge"" to steal the remaining Ɵme.`,
+    description: `Just a Minute (JAM) is a public speaking game where participants must speak on a
+random topic for sixty seconds. The challenge is to talk without hesitation, repetition,
+or deviation. It tests mental agility, vocabulary, and composure, as opponents can
+"challenge" to steal the remaining time.`,
     posterurl: `https://res.cloudinary.com/drf3eatfm/image/upload/v1768933384/nitrutsav-2026/keqoemm1hvccf9v4vry4.webp`,
   },
   {
@@ -201,5 +201,12 @@ export const MainEvents = [
     name: `Beyond the Beats`,
     description: ``,
     posterurl: `https://res.cloudinary.com/drf3eatfm/image/upload/v1768933373/nitrutsav-2026/pmkdgmdevcyndagf5gkc.webp`,
+  },
+  {
+    club: `Chitraang`,
+    rulebook: `https://drive.google.com/open?id=1t2zNQ8uBCxKJYtz4XmLWF7A4GmDihb03`,
+    name: `Palette`,
+    description: ``,
+    posterurl: `https://res.cloudinary.com/drf3eatfm/image/upload/v1768938064/nitrutsav-2026/mk3m1jx3hzb971idgypc.webp`,
   },
 ];

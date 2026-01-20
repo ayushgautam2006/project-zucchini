@@ -1,6 +1,8 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import { createPortal } from "react-dom";
+import { useEffect, useState } from "react";
 
 export interface Event {
   name: string;
@@ -17,16 +19,22 @@ interface EventModalProps {
 }
 
 export function EventModal({ event, isOpen, onClose }: EventModalProps) {
-  if (!isOpen) return null;
+  const [mounted, setMounted] = useState(false);
 
-  return (
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!isOpen || !mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 "
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 "
           onClick={onClose}
         >
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
@@ -57,7 +65,9 @@ export function EventModal({ event, isOpen, onClose }: EventModalProps) {
                     {event.description}
                   </p>
 
-                  <p className="text-sm md:text-base font-inria text-white/60">{event.club}</p>
+                  {event.club && (
+                    <p className="text-sm md:text-base font-inria text-white/60">By {event.club}</p>
+                  )}
 
                   <div className="flex items-center gap-4 mt-2">
                     {event.rulebook && (
@@ -77,6 +87,7 @@ export function EventModal({ event, isOpen, onClose }: EventModalProps) {
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }

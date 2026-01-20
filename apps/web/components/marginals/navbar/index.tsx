@@ -264,7 +264,7 @@ export default function Header() {
       {/* Mobile Event Category Dropdown */}
       {isCategoryOpen && (
         <div
-          className="fixed inset-0 min-h-screen bg-black/95 flex flex-col items-center justify-center md:hidden"
+          className="fixed inset-0 min-h-screen bg-black/70 flex flex-col items-center justify-center md:hidden backdrop-blur-sm"
           style={{
             zIndex: 44,
             animation: isCategoryClosing

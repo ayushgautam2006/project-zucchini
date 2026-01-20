@@ -33,6 +33,7 @@ export default function EventSwiper({
   return (
     <div className="relative w-full max-w-[90vw] text-white py-4 pl-4 md:pl-0">
       <Swiper
+        key={`${events[0]?.name || "default"}-${events.length}`}
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         slidesPerView="auto"
         spaceBetween={32}

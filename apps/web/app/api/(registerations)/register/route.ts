@@ -14,6 +14,7 @@ export async function POST(request: NextRequest) {
       auth.uid,
       isNitrStudent,
       wantsAccommodation,
+
       referralCode // Pass referral code for validation
     );
     return handleResponse(result, 201);
