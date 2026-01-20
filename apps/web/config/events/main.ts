@@ -63,6 +63,26 @@ export const MainEvents = [
     posterurl: `https://res.cloudinary.com/drf3eatfm/image/upload/v1768933372/nitrutsav-2026/ro8wyn9gl09cwtrmpbia.webp`,
   },
   {
+    club: `Clarion`,
+    rulebook: `https://drive.google.com/open?id=1cJzPc_UHunbrKwWBp97aUIhyWTAfmlHs`,
+    name: `NU Journalist`,
+    description: `You are transported to a Hollywood set. A starlet is dead on set,
+    and each crew member holds a secret. As investigation reporters,
+    you must interrogate the cast and crew, and make reports to
+    publish your own journal about the real killer.`,
+    posterurl: `https://res.cloudinary.com/drf3eatfm/image/upload/v1768935171/nitrutsav-2026/kqszmvopea4ewm4fmltm.webp`,
+  },
+  {
+    club: `Clarion`,
+    rulebook: `https://drive.google.com/open?id=1z1aaX4o1dq_5vDH-HpvCiPqvzrvz4Fuc`,
+    name: `Litalympics`,
+    description: `A quiz with three subsequent rounds, where we judge you on the
+    basis of your wit and presence of mind. Whether it’s the blues of a
+    tragic hero or the golden age of cinema, Litlympics tests your
+    knowledge across the entire spectrum.`,
+    posterurl: `https://res.cloudinary.com/drf3eatfm/image/upload/v1768936178/nitrutsav-2026/ommrpxtbegnjwkagylxw.webp`,
+  },
+  {
     club: `Fusion`,
     rulebook: `https://drive.google.com/open?id=15qR2v0eKBUd6nKxY3VkvbDPCh1BeZQoA`,
     name: `Street Vogue`,
