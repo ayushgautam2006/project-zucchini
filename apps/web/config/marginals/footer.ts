@@ -13,14 +13,14 @@ export const footerLinks = {
     { label: "Events", href: "/events" },
     { label: "MUN", href: "/register/mun" },
     { label: "Register", href: "/register" },
-    { label: "Contact", href: "/about#contact" },
+    { label: "Contact", href: "/team#contact" },
   ],
   legalLinks: [
     { label: "Terms & Conditions", href: "/terms-and-conditions" },
     { label: "Privacy Policy", href: "/privacy-policy" },
     { label: "Refund Policy", href: "/refund-policy" },
     { label: "Code of Conduct", href: "/code-of-conduct" },
-    { label: "Contact", href: "/about#contact" },
+    { label: "Contact", href: "/team#contact" },
   ],
   socialLinks: [
     {

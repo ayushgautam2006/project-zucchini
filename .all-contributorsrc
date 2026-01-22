@@ -1,5 +1,7 @@
 {
-  "files": ["README.md"],
+  "files": [
+    "README.md"
+  ],
   "imageSize": 100,
   "commit": false,
   "commitType": "docs",
@@ -10,7 +12,91 @@
       "name": "Ayush",
       "avatar_url": "https://avatars.githubusercontent.com/u/135319056?v=4",
       "profile": "https://ayussh.vercel.app/",
-      "contributions": ["code", "doc"]
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "Tiyas04",
+      "name": "Tiyas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/191564417?v=4",
+      "profile": "http://tiyas.vercel.app",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "srikant3691",
+      "name": "Srikant Panigrahy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/180011583?v=4",
+      "profile": "https://github.com/srikant3691",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ayantik2006",
+      "name": "Ayantik Sarkar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/99005057?v=4",
+      "profile": "https://github.com/ayantik2006",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "AshutoshMishra1615",
+      "name": "AshutoshMishra1615",
+      "avatar_url": "https://avatars.githubusercontent.com/u/135343059?v=4",
+      "profile": "https://github.com/AshutoshMishra1615",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "priyanshunitr",
+      "name": "Priyanshu Sahu",
+      "avatar_url": "https://avatars.githubusercontent.com/u/224602597?v=4",
+      "profile": "https://github.com/priyanshunitr",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "shuvam776",
+      "name": "Shuvam Satapathi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/214760020?v=4",
+      "profile": "https://github.com/shuvam776",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "HIMANSHU6001",
+      "name": "Himanshu Kaushik",
+      "avatar_url": "https://avatars.githubusercontent.com/u/92459082?v=4",
+      "profile": "https://github.com/HIMANSHU6001",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "parthsaxena2005",
+      "name": "parthsaxena2005",
+      "avatar_url": "https://avatars.githubusercontent.com/u/71390430?v=4",
+      "profile": "https://github.com/parthsaxena2005",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "SnehaAgarwal31",
+      "name": "SnehaAgarwal31",
+      "avatar_url": "https://avatars.githubusercontent.com/u/194969842?v=4",
+      "profile": "https://github.com/SnehaAgarwal31",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

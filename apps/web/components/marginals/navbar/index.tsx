@@ -20,6 +20,7 @@ export default function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isCategoryClosing, setIsCategoryClosing] = useState(false);
+  const [isEventsDropdownOpen, setIsEventsDropdownOpen] = useState(false);
   const pathname = usePathname();
   const { activeCategory, setActiveCategory, categories } = useEventCategory();
   const isEventsPage = pathname === "/events";
@@ -66,7 +67,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 z-[9999] w-full px-6 pt-4 md:pt-8 pb-2 transition-all duration-300  ${
+      className={`fixed top-0 z-9999 w-full px-6 pt-4 md:pt-8 pb-2 transition-all duration-300  ${
         isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
       }`}
     >
@@ -81,7 +82,7 @@ export default function Header() {
             />
           </Link>
 
-          <nav className="hidden md:flex gap-5 lmd:gap-8 lg:gap-12 text-white font-inria">
+          <nav className="hidden md:flex gap-4 lmd:gap-8 lg:gap-12 text-white font-inria">
             {navItems.map((item) => {
               const isActive = isActiveRoute(item.href);
               return (
@@ -110,7 +111,7 @@ export default function Header() {
           <MobileMusicVisualizer />
         </div>
 
-        <div className="flex items-center gap-4 lg:gap-12">
+        <div className=" flex items-center gap-2 md:gap-4 lmd:gap-12">
           <div className="hidden md:block">
             <CountdownTimer />
           </div>
@@ -119,7 +120,7 @@ export default function Header() {
             <MusicVisualizer />
           </div>
 
-          {/* Mobile Event Category Button - Only visible on events page */}
+          {/* Mobile Event   Category Button - Only visible on events page */}
           {isEventsPage && (
             <button
               onClick={toggleCategoryMenu}
@@ -177,12 +178,65 @@ export default function Header() {
             if (isClosing) {
               setIsMenuOpen(false);
               setIsClosing(false);
+              setIsEventsDropdownOpen(false);
             }
           }}
         >
           <nav className="flex flex-col gap-8 text-white text-2xl text-center font-inria">
             {navItems.map((item) => {
               const isActive = isActiveRoute(item.href);
+              const isEventItem = item.label === "Events";
+
+              if (isEventItem) {
+                return (
+                  <div key={item.label} className="flex flex-col items-center">
+                    <button
+                      onClick={() => setIsEventsDropdownOpen(!isEventsDropdownOpen)}
+                      className={`cursor-pointer relative group transition-opacity duration-300 ${
+                        isActive || isEventsDropdownOpen
+                          ? "opacity-100"
+                          : "opacity-60 hover:opacity-100"
+                      }`}
+                    >
+                      {item.label}
+                      <div
+                        className={`absolute left-0 -bottom-2 h-[3px] transition-all duration-300 overflow-hidden ${
+                          isActive || isEventsDropdownOpen ? "w-full" : "w-0 group-hover:w-full"
+                        }`}
+                      >
+                        <GradientUnderline className="w-full h-full" />
+                      </div>
+                    </button>
+
+                    <div
+                      className={`overflow-hidden transition-all duration-300 ease-in-out flex flex-col gap-4 mt-2 ${
+                        isEventsDropdownOpen
+                          ? "max-h-[300px] opacity-100 pt-4"
+                          : "max-h-0 opacity-0"
+                      }`}
+                    >
+                      {categories.map((category) => (
+                        <Link
+                          key={category}
+                          href="/events"
+                          onClick={() => {
+                            handleCategorySelect(category);
+                            handleCloseMenu();
+                          }}
+                          className={`text-lg uppercase tracking-wider transition-all duration-300 ${
+                            activeCategory === category
+                              ? "bg-clip-text text-transparent bg-gradient-to-r from-[#EA0B0F] via-[#F3BC16] to-[#FF0092]"
+                              : "text-white/70 hover:text-white"
+                          }`}
+                        >
+                          {category}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
+
               return (
                 <Link
                   key={item.label}
@@ -210,7 +264,7 @@ export default function Header() {
       {/* Mobile Event Category Dropdown */}
       {isCategoryOpen && (
         <div
-          className="fixed inset-0 min-h-screen bg-black/95 flex flex-col items-center justify-center md:hidden"
+          className="fixed inset-0 min-h-screen bg-black/70 flex flex-col items-center justify-center md:hidden backdrop-blur-sm"
           style={{
             zIndex: 44,
             animation: isCategoryClosing

@@ -11,7 +11,7 @@ export function MunInfoStep({ onProceedToRegister }: MunInfoStepProps) {
   return (
     <div className="text-center py-6 max-w-3xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 font-baloo">
+        <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 font-berlins">
           Welcome to NITRIMUN
         </h1>
         <p className="text-white/80 text-lg font-inria">
@@ -20,7 +20,7 @@ export function MunInfoStep({ onProceedToRegister }: MunInfoStepProps) {
       </div>
 
       {/* About Section */}
-      <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 md:p-8 mb-8 text-left border border-white/10">
+      <div className="bg-white/5  rounded-2xl p-6 md:p-8 mb-8 text-left ">
         <div className="space-y-4 text-white/90 font-inria leading-relaxed">
           <p>
             <span className="text-white font-semibold">NITRIMUN</span> is the annual flagship Model
@@ -49,7 +49,7 @@ export function MunInfoStep({ onProceedToRegister }: MunInfoStepProps) {
 
       {/* Register Button */}
       <Button onClick={onProceedToRegister} className="h-[75px] w-[275px] flex items-center">
-        <span className="text-lg">Register Now</span>
+        <span className="">Register Now</span>
       </Button>
     </div>
   );

@@ -5,11 +5,26 @@ import * as dotenv from "dotenv";
 
 dotenv.config();
 
+// Parse command line arguments for --location flag
+const args = process.argv.slice(2);
+const locationArg = args.find((arg) => arg.startsWith("--location="));
+const targetLocation = locationArg ? locationArg.split("=")[1] : null;
+
+// Build search pattern based on --location flag
+const getSearchPattern = () => {
+  if (targetLocation) {
+    // If location is provided, search only in that specific directory
+    return `../../apps/web/${targetLocation}/**/*.{ts,tsx,js,jsx,json,css}`;
+  }
+  // Default: search all files in apps/web
+  return "../../apps/web/**/*.{ts,tsx,js,jsx,json,css}";
+};
+
 const CONFIG = {
   cloud_name: process.env.NEW_CLOUDINARY_CLOUD_NAME,
   api_key: process.env.NEW_CLOUDINARY_API_KEY,
   api_secret: process.env.NEW_CLOUDINARY_API_SECRET,
-  searchPattern: "../../apps/web/**/*.{ts,tsx,js,jsx,json,css}",
+  searchPattern: getSearchPattern(),
   urlRegex:
     /https?:\/\/res\.cloudinary\.com\/[\w-]+\/image\/upload\/v\d+\/([\w-\/]+)\.(jpg|jpeg|png|webp|svg|gif)/g,
 };
@@ -73,6 +88,12 @@ interface MigrationResult {
 
 async function migrate() {
   log("Starting Cloudinary Migration", "HEADER");
+
+  if (targetLocation) {
+    log(`Running in TARGETED mode for directory: ${targetLocation}`);
+  } else {
+    log("Running FULL SCAN mode (all files in apps/web)");
+  }
 
   // 1. Find files
   log(`Scanning for files in ${CONFIG.searchPattern}...`);

@@ -14,7 +14,7 @@ export default function MusicVisualizer() {
   return (
     <div
       onClick={togglePlay}
-      className="relative w-12 h-12 md:w-16 md:h-16 flex-shrink-0 cursor-pointer"
+      className="relative w-12 h-12 lmd:w-16 lmd:h-16 flex-shrink-0 cursor-pointer"
     >
       <div className="w-full h-full rounded-full border-2 border-white/60 backdrop-blur-sm fill-[rgba(217,217,217,0.20)]" />
       <div className="absolute inset-0 flex items-center justify-center gap-[2px]">

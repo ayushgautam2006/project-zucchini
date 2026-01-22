@@ -6,6 +6,7 @@ import VideoCard from "../../../components/about/video-card";
 import { SectionHeading } from "@/components/ui";
 import ContactSection from "@/components/contact/contact";
 import { background } from "@/config/events";
+import InstituteInfoCard from "@/components/contact/institute-card";
 
 const lengthConfigs = {
   aboveLLG: {
@@ -61,7 +62,7 @@ export default function AboutPage() {
       </div>
 
       {/* Main content wrapper */}
-      <main className="min-h-screen lmd:grid lmd:place-items-center pt-20">
+      <section className="min-h-screen lmd:grid lmd:place-items-center py-20">
         <div className="w-full pt-32 lmd:pt-0">
           <div className="max-w-full lmd:max-w-5xl llg:max-w-6xl mx-auto flex flex-col lmd:flex-row lmd:items-center justify-between lmd:gap-4 px-5">
             <div className="lmd:-skew-y-13 w-full flex justify-start lmd:block">
@@ -72,14 +73,7 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
-      </main>
-
-      <main className="min-h-screen pb-32 pt-20">
-        <div className="h-full max-w-7xl mx-auto px-10" id="contact">
-          <SectionHeading title="Contact Us" containerClassName="mb-20" />
-          <ContactSection />
-        </div>
-      </main>
+      </section>
     </div>
   );
 }

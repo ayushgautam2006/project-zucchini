@@ -24,7 +24,7 @@ export default function CountdownTimer() {
   }, []);
 
   return (
-    <div className="flex items-start gap-4 text-white font-berry">
+    <div className="flex items-start gap-2 lmd:gap-4 text-white font-berry">
       {[
         { val: timeLeft.days, label: "DAYS" },
         { val: ":", label: "" },
@@ -33,7 +33,7 @@ export default function CountdownTimer() {
         { val: timeLeft.minutes, label: "MINUTES" },
       ].map((item, idx) => (
         <div key={idx} className="flex flex-col items-center">
-          <span className="text-2xl md:text-3xl leading-none">
+          <span className="text-base llmd:text-lg lmd:text-2xl leading-none">
             {typeof item.val === "number" ? item.val.toString().padStart(2, "0") : item.val}
           </span>
           {item.label && (

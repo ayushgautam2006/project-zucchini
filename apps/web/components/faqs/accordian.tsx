@@ -3,10 +3,10 @@ import { cn } from "@/lib/utils";
 
 export function FAQAccordionItem({ item, isExpanded, onClick, index }: FAQAccordionItemProps) {
   return (
-    <div className="relative cursor-pointer rounded-tr-2xl rounded-bl-2xl" onClick={onClick}>
+    <div className="relative cursor-pointer rounded-[12px]" onClick={onClick}>
       <div
         className={cn(
-          "relative w-full bg-white/10 border-2 border-white rounded-tr-2xl rounded-bl-2xl",
+          "relative w-full bg-white/10 border-2 border-white rounded-[12px]",
           "px-4 py-4 sm:px-5 sm:py-5 md:px-7 md:py-[22px]",
           "backdrop-blur-[14px] transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)]",
           isExpanded && "py-6 sm:py-7 md:py-9"

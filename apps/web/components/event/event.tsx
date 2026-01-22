@@ -27,12 +27,11 @@ const categories: Record<string, any[]> = {
 export default function Event() {
   const { activeCategory, setActiveCategory } = useEventCategory();
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const textSwiperRef = useRef<any>(null);
 
   const currentEvents = categories[activeCategory] || ProShows;
-  const activeEvent = currentEvents[activeIndex];
 
-  // Reset to first slide when category changes
   useEffect(() => {
     setActiveIndex(0);
   }, [activeCategory]);
@@ -45,32 +44,6 @@ export default function Event() {
 
   return (
     <div className="relative w-full min-h-screen overflow-hidden events-bg py-20">
-      {/* BACKGROUNDS */}
-      {/* <Image
-        src={Images.BackgroundImg2}
-        alt="Color Background"
-        fill
-        className="object-cover opacity-[40%] blur-[50px] contrast-150 brightness-60 saturate-400"
-      />
-
-      <Image
-        src={Images.BackgroundImg1}
-        alt="Base Background"
-        fill
-        className="absolute inset-0 opacity-[70%] blur-[2px] mix-blend-color-dodge grayscale scale-120"
-      />
-
-      <div className="absolute inset-0 flex items-center justify-center">
-        <Image
-          src={Images.centreBackgroundImg}
-          alt="Center Background"
-          height={2116}
-          width={712}
-          className="object-contain opacity-[70%] grayscale mix-blend-color-dodge scale-110"
-        />
-      </div> */}
-
-      {/* DARK MASK */}
       <div
         className="
                     absolute inset-0 bg-black/55 pointer-events-none
@@ -82,13 +55,18 @@ export default function Event() {
       <div className="relative z-10 flex flex-col w-full min-h-screen ">
         {/* HERO SWIPER */}
         <div className="flex flex-col items-center justify-center mt-6 md:mt-8 mb-6">
-          <EventSwiper events={currentEvents} onSlideChange={setActiveIndex} />
+          <EventSwiper
+            events={currentEvents}
+            onSlideChange={setActiveIndex}
+            disabled={isModalOpen}
+          />
         </div>
 
         <div className="w-full max-w-[90vw] mx-auto mt-2 mb-2 flex flex-col md:grid md:grid-cols-2 gap-10 md:gap-14 px-4 text-white">
           <EventInfo
             events={currentEvents}
             onSwiper={(swiper) => (textSwiperRef.current = swiper)}
+            onModalChange={setIsModalOpen}
           />
 
           <EventCategory
