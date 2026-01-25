@@ -72,7 +72,6 @@ Following technologies and libraries are used for the development of this websit
 - [TypeScript 5](https://www.typescriptlang.org/) - Type safety
 - [Tailwind CSS 4](https://tailwindcss.com/) - Styling
 - [Firebase](https://firebase.google.com/) - Backend services
-- [Flutter](https://flutter.dev/) - Mobile App
 - [Turborepo](https://turbo.build/repo) - Monorepo build system
 - [pnpm](https://pnpm.io/) - Package manager
 - [Zod](https://zod.dev/) - Schema validation
@@ -193,7 +192,6 @@ pnpm typecheck
 project-zucchini/
 ├── apps/
 │   ├── admin/          # Admin dashboard (Next.js)
-│   ├── mobile/         # Mobile app (Flutter - Coming Soon)
 │   └── web/            # Main website (Next.js)
 ├── packages/
 │   ├── eslint-config/  # Shared ESLint configs

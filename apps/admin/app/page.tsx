@@ -141,7 +141,6 @@ export default function AdminPage() {
             color="bg-purple-500/20 text-purple-400"
             stats={[
               { label: "Total", value: munStats.total },
-              { label: "Teams", value: munStats.teams },
               { label: "Male", value: munStats.male },
               { label: "Female", value: munStats.female },
             ]}

@@ -13,6 +13,7 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { Download } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,12 +33,17 @@ import {
 } from "@/components/ui/table";
 
 import { DataTablePagination } from "./datapagination";
+import { downloadCSV, extractHeadersFromTable } from "./export-utils";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   emptyMessage?: string;
   onRowClick?: (row: TData) => void;
+  /** Enable export buttons for CSV and Excel download */
+  exportable?: boolean;
+  /** Filename for exported files (without extension) */
+  exportFilename?: string;
 }
 
 export function DataTable<TData, TValue>({
@@ -45,6 +51,8 @@ export function DataTable<TData, TValue>({
   data,
   emptyMessage = "No users found.",
   onRowClick,
+  exportable = false,
+  exportFilename = "table-export",
 }: DataTableProps<TData, TValue>) {
   /* hooks first */
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -71,11 +79,32 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
   });
 
+  // Export handlers
+  const handleExportCSV = () => {
+    const headers = extractHeadersFromTable(table);
+    downloadCSV(data as Record<string, unknown>[], headers, exportFilename);
+  };
+
   return (
-    <div className="min-h-screen ">
-      <div className="mx-auto w-full rounded-xl border border-zinc-800 bg-zinc-900 shadow-lg">
+    <div className="w-full max-w-full overflow-hidden">
+      <div className="mx-auto w-full max-w-full rounded-xl border border-zinc-800 bg-zinc-900 shadow-lg overflow-hidden">
+        {/* ===== EXPORT TOOLBAR ===== */}
+        {exportable && (
+          <div className="flex items-center justify-end gap-2 border-b border-zinc-800 p-4">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleExportCSV}
+              className="gap-2 border-zinc-700 bg-zinc-800 text-zinc-200 hover:bg-zinc-700 hover:text-white"
+            >
+              <Download className="h-4 w-4" />
+              Export CSV
+            </Button>
+          </div>
+        )}
+
         {/* ===== TABLE ===== */}
-        <div className="overflow-hidden">
+        <div className="overflow-x-auto">
           <Table>
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (

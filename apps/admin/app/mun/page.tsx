@@ -1,19 +1,7 @@
 "use client";
 
 import { useState, useCallback, useMemo } from "react";
-import {
-  Users,
-  CheckCircle,
-  Clock,
-  Gavel,
-  Crown,
-  ChevronDown,
-  ChevronRight,
-  User,
-  Search,
-  Table,
-  LayoutGrid,
-} from "lucide-react";
+import { Users, Clock, Gavel, User, Search } from "lucide-react";
 import Header from "@/components/header";
 import { DataTable } from "@/components/ui/data-table/data-table";
 import { munColumns, MunRegistration } from "@/components/ui/data-table/mun-columns";
@@ -22,221 +10,10 @@ import { useMunTeams, useMunRegistrations } from "@/lib/queries";
 import { useDebouncedSearch } from "@/lib/hooks/use-debounced-search";
 import { searchMunUsers } from "@/lib/api";
 import type { Team, TeamMember } from "@/lib/api";
-
-function StatCard({
-  title,
-  value,
-  icon: Icon,
-  color,
-}: {
-  title: string;
-  value: number;
-  icon: React.ComponentType<{ className?: string }>;
-  color: string;
-}) {
-  return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-4">
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-sm text-zinc-400">{title}</p>
-          <p className="mt-1 text-2xl font-bold text-white">{value}</p>
-        </div>
-        <div className={`rounded-full p-3 ${color}`}>
-          <Icon className="h-5 w-5" />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function TeamCard({
-  team,
-  isExpanded,
-  onToggle,
-}: {
-  team: Team;
-  isExpanded: boolean;
-  onToggle: () => void;
-}) {
-  const leader = team.members.find((m) => m.isTeamLeader);
-  const allNitrStudents = team.members.every((m) => m.isNitrStudent);
-
-  return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-900 overflow-hidden">
-      <div
-        className="flex items-center justify-between p-4 cursor-pointer hover:bg-zinc-800/50 transition-colors"
-        onClick={onToggle}
-      >
-        <div className="flex items-center gap-4">
-          {isExpanded ? (
-            <ChevronDown className="h-5 w-5 text-zinc-400" />
-          ) : (
-            <ChevronRight className="h-5 w-5 text-zinc-400" />
-          )}
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="font-medium text-white">{leader?.name || "Team"}</span>
-              <span className="text-xs font-mono bg-zinc-800 px-2 py-1 rounded text-zinc-400">
-                {team.teamId.slice(0, 8)}
-              </span>
-            </div>
-            <div className="flex items-center gap-2 mt-1">
-              <span className="text-xs font-medium px-2 py-0.5 rounded bg-purple-500/20 text-purple-400">
-                Moot Court
-              </span>
-              <span
-                className={`text-xs font-medium px-2 py-0.5 rounded ${
-                  team.studentType === "COLLEGE"
-                    ? "bg-blue-500/20 text-blue-400"
-                    : "bg-green-500/20 text-green-400"
-                }`}
-              >
-                {team.studentType}
-              </span>
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <span className="text-sm text-zinc-400">{team.members.length} members</span>
-          {allNitrStudents ? (
-            <span className="text-xs font-medium px-2 py-1 rounded bg-zinc-700 text-zinc-300">
-              N/A
-            </span>
-          ) : team.isPaymentVerified ? (
-            <span className="text-xs font-medium px-2 py-1 rounded bg-emerald-500/20 text-emerald-400 flex items-center gap-1">
-              <CheckCircle className="h-3 w-3" />
-              Paid
-            </span>
-          ) : (
-            <span className="text-xs font-medium px-2 py-1 rounded bg-amber-500/20 text-amber-400 flex items-center gap-1">
-              <Clock className="h-3 w-3" />
-              Pending
-            </span>
-          )}
-        </div>
-      </div>
-
-      {isExpanded && (
-        <div className="border-t border-zinc-800 divide-y divide-zinc-800">
-          {team.members.map((member) => (
-            <div key={member.id} className="p-4 bg-zinc-950/50">
-              <div className="flex items-start justify-between">
-                <div>
-                  <div className="flex items-center gap-2">
-                    {member.isTeamLeader && <Crown className="h-4 w-4 text-amber-400" />}
-                    <span className="font-medium text-zinc-100">{member.name}</span>
-                    {member.isTeamLeader && (
-                      <span className="text-xs bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded">
-                        Leader
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-sm text-zinc-400 mt-1">{member.email}</p>
-                  <p className="text-sm text-zinc-500">{member.phone}</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-sm text-zinc-400">{member.institute}</p>
-                  <p className="text-sm text-zinc-500">
-                    {member.city}, {member.state}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function IndividualCard({ member }: { member: TeamMember }) {
-  const committeeLabels: Record<string, string> = {
-    UNHRC: "UNHRC",
-    UNGA_DISEC: "UNGA DISEC",
-    ECOSOC: "ECOSOC",
-    AIPPM: "AIPPM",
-    IP_PHOTOGRAPHER: "IP - Photo",
-    IP_JOURNALIST: "IP - Journal",
-    UNSC_OVERNIGHT_CRISIS: "UNSC Crisis",
-    AIPPM_OVERNIGHT_CRISIS: "AIPPM Crisis",
-  };
-  return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-4">
-      <div className="flex items-start justify-between">
-        <div className="flex items-start gap-3">
-          <div className="rounded-full p-2 bg-orange-500/20 text-orange-400">
-            <User className="h-5 w-5" />
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="font-medium text-white">{member.name}</span>
-              <span className="text-xs font-medium px-2 py-0.5 rounded bg-orange-500/20 text-orange-400">
-                {committeeLabels[member.committeeChoice] || member.committeeChoice}
-              </span>
-              <span
-                className={`text-xs font-medium px-2 py-0.5 rounded ${
-                  member.studentType === "COLLEGE"
-                    ? "bg-blue-500/20 text-blue-400"
-                    : "bg-green-500/20 text-green-400"
-                }`}
-              >
-                {member.studentType}
-              </span>
-            </div>
-            <p className="text-sm text-zinc-400 mt-1">{member.email}</p>
-            <p className="text-sm text-zinc-500">{member.phone}</p>
-          </div>
-        </div>
-        <div className="text-right">
-          <p className="text-sm text-zinc-400">{member.institute}</p>
-          <p className="text-sm text-zinc-500">
-            {member.city}, {member.state}
-          </p>
-          {member.isNitrStudent ? (
-            <span className="text-xs font-medium px-2 py-0.5 rounded bg-zinc-700 text-zinc-300 inline-block mt-2">
-              NITR - N/A
-            </span>
-          ) : (
-            <span className="text-xs font-medium px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 inline-block mt-2">
-              Payment Required
-            </span>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ViewToggle({
-  view,
-  onViewChange,
-}: {
-  view: "cards" | "table";
-  onViewChange: (view: "cards" | "table") => void;
-}) {
-  return (
-    <div className="flex items-center gap-1 bg-zinc-900 border border-zinc-800 rounded-lg p-1">
-      <button
-        onClick={() => onViewChange("cards")}
-        className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-          view === "cards" ? "bg-zinc-700 text-white" : "text-zinc-400 hover:text-zinc-200"
-        }`}
-      >
-        <LayoutGrid className="h-4 w-4" />
-        Cards
-      </button>
-      <button
-        onClick={() => onViewChange("table")}
-        className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-          view === "table" ? "bg-zinc-700 text-white" : "text-zinc-400 hover:text-zinc-200"
-        }`}
-      >
-        <Table className="h-4 w-4" />
-        Table
-      </button>
-    </div>
-  );
-}
+import { StatCard } from "@/components/stat-card";
+import { TeamCard } from "@/components/mun/team-card";
+import { IndividualCard } from "@/components/mun/individual-card";
+import { ViewToggle } from "@/components/mun/view-toggle";
 
 export default function MunPage() {
   const { data: teamsData, isLoading: teamsLoading } = useMunTeams();
@@ -373,12 +150,18 @@ export default function MunPage() {
         </div>
 
         {view === "table" ? (
-          <>
+          <div className="max-w-[75rem] mx-auto">
             <p className="text-sm text-zinc-400 mb-3">
               💡 Click on a row to view full registration details
             </p>
-            <DataTable columns={munColumns} data={searchResults} onRowClick={handleRowClick} />
-          </>
+            <DataTable
+              columns={munColumns}
+              data={searchResults}
+              onRowClick={handleRowClick}
+              exportable={true}
+              exportFilename={`mun-${new Date().toISOString().split("T")[0]}`}
+            />
+          </div>
         ) : (
           <>
             {/* Moot Court Teams Section */}

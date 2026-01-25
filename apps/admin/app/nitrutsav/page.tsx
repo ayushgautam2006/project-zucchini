@@ -13,33 +13,8 @@ import { useNitrutsavRegistrations } from "@/lib/queries";
 import { useDebouncedSearch } from "@/lib/hooks/use-debounced-search";
 import { searchNitrutsavUsers } from "@/lib/api";
 
-function StatCard({
-  title,
-  value,
-  icon: Icon,
-  color,
-}: {
-  title: string;
-  value: number;
-  icon: React.ComponentType<{ className?: string }>;
-  color: string;
-}) {
-  return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-4">
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-sm text-zinc-400">{title}</p>
-          <p className="mt-1 text-2xl font-bold text-white">{value}</p>
-        </div>
-        <div className={`rounded-full p-3 ${color}`}>
-          <Icon className="h-5 w-5" />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-type FilterTab = "all" | "nitr" | "non-nitr";
+import { StatCard } from "@/components/stat-card";
+import { FilterTabs, FilterTab } from "@/components/nitrutsav/filter-tabs";
 
 export default function NitrutsavPage() {
   const { data, isLoading } = useNitrutsavRegistrations();
@@ -144,36 +119,7 @@ export default function NitrutsavPage() {
         {/* Filter Tabs and Search Bar */}
         <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           {/* Filter Tabs */}
-          <div className="flex items-center gap-1 bg-zinc-900 border border-zinc-800 rounded-lg p-1">
-            <button
-              onClick={() => setFilterTab("all")}
-              className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${
-                filterTab === "all" ? "bg-zinc-700 text-white" : "text-zinc-400 hover:text-zinc-200"
-              }`}
-            >
-              All
-            </button>
-            <button
-              onClick={() => setFilterTab("nitr")}
-              className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${
-                filterTab === "nitr"
-                  ? "bg-purple-500/20 text-purple-400"
-                  : "text-zinc-400 hover:text-zinc-200"
-              }`}
-            >
-              NITR
-            </button>
-            <button
-              onClick={() => setFilterTab("non-nitr")}
-              className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${
-                filterTab === "non-nitr"
-                  ? "bg-orange-500/20 text-orange-400"
-                  : "text-zinc-400 hover:text-zinc-200"
-              }`}
-            >
-              Non-NITR
-            </button>
-          </div>
+          <FilterTabs currentTab={filterTab} onTabChange={setFilterTab} />
 
           {/* Search Bar */}
           <div className="relative max-w-md w-full sm:w-auto">
@@ -193,7 +139,13 @@ export default function NitrutsavPage() {
           </div>
         </div>
 
-        <DataTable columns={nitrutsavColumns} data={filteredResults} onRowClick={handleRowClick} />
+        <DataTable
+          columns={nitrutsavColumns}
+          data={filteredResults}
+          onRowClick={handleRowClick}
+          exportable={true}
+          exportFilename={`nitrutsav-${new Date().toISOString().split("T")[0]}`}
+        />
       </main>
 
       <NitrutsavRegistrationModal
