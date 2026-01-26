@@ -32,8 +32,7 @@ Bring your story. Own the stage. Let the act speak.`,
     club: `The Mavericks`,
     rulebook: `https://drive.google.com/file/d/1SvK-powDY9DGwM44Vo_mruWecPP2DJL1/view?usp=sharing`,
     name: `BREAKBEATS`,
-    description: `Be it hip hop, house, breaking, popping, krump, locking, every move matters. Showcase your
-groove and style and let the streets come alive.`,
+    description: `Nitrutsav presents BREAKBEATS, the street dance battle of NIT Rourkela. It’s a full-on dance throwdown featuring 1 VS 1 (Open Style) for solo warriors ready to claim the top spot and 3 VS 3 (All Style) for crews to light up the floor. From Hip-Hop to Popping, Locking, Waacking, Breaking, Krumping, Lite-feet, and Afro, this is where the streets come alive. With solo battles and crew face-offs, it’s not just a competition; it’s a celebration of rhythm, grooves, and unmatched creativity. Whether you're repping your crew or owning the solo spotlight, Breakbeats is where legends are born. Bring your moves, bring your fire, because the streets are calling, and it’s time to answer.`,
     posterurl: `https://res.cloudinary.com/domaovjhf/image/upload/v1769110736/nitrutsav-2026/ijdcvf6ygzrk4zmekdac.webp`,
   },
   {
