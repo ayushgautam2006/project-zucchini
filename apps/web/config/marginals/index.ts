@@ -21,8 +21,8 @@ export const navItems = [
     href: "/team",
   },
   {
-    label: "Faqs",
-    href: "/faqs",
+    label: "Merch",
+    href: "/merch",
   },
   {
     label: "Sponsors",

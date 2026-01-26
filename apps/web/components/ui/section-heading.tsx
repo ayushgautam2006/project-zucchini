@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import Lines from "./lines";
 
 interface SectionHeadingProps {
-  title: string;
+  title: React.ReactNode;
   showLines?: boolean;
   className?: string;
   containerClassName?: string;
